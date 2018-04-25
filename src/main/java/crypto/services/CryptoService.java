@@ -2,6 +2,7 @@ package crypto.services;
 
 
 import crypto.models.HistoHourRoot;
+import crypto.models.HistoMinuteRoot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -19,6 +20,15 @@ public class CryptoService {
 
         return rootObject;
 
+
+    }
+
+    public HistoMinuteRoot mapHistoMinute(String fsym, String tsym, int limit, int aggregate, String e){
+        String fquery = "https://min-api.cryptocompare.com/data/histominute?fsym="+fsym+"&tsym="+tsym+"&limit="+limit+"&aggregate="+aggregate+"&e="+e;
+
+        HistoMinuteRoot rootObject = restTemplate.getForObject(fquery, HistoMinuteRoot.class);
+
+        return rootObject;
 
     }
 }
